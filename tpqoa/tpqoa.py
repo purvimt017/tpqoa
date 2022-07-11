@@ -93,7 +93,7 @@ def service_shutdown(signum, frame):
 class tpqoa(object):
     ''' tpqoa is a Python wrapper class for the Oanda v20 API. '''
 
-    def __init__(self, conf_file):
+    def __init__(self, access_token, account_id, account_type):
         ''' Init function is expecting a configuration file with
         the following content:
 
@@ -108,11 +108,9 @@ class tpqoa(object):
             path to and filename of the configuration file,
             e.g. '/home/me/oanda.cfg'
         '''
-        self.config = configparser.ConfigParser()
-        self.config.read(conf_file)
-        self.access_token = self.config['oanda']['access_token']
-        self.account_id = self.config['oanda']['account_id']
-        self.account_type = self.config['oanda']['account_type']
+        self.access_token = access_token
+        self.account_id = account_id
+        self.account_type = account_type
 
         if self.account_type == 'live':
             self.hostname = 'api-fxtrade.oanda.com'
